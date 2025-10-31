@@ -16,7 +16,7 @@ import AIDeepfake from "@/pages/modules/ai-deepfake";
 import SocialMedia from "@/pages/modules/social-media";
 import NetworkTraffic from "@/pages/modules/network-traffic";
 import FaceRecognition from "@/pages/modules/face-recognition";
-import MobileForensics from "@/pages/modules/mobil  e-forensics";
+import MobileForensics from "@/pages/modules/mobile-forensics";
 import VideoAnalysis from "@/pages/modules/video-analysis";
 import AudioForensics from "@/pages/modules/audio-forensics";
 import Steganography from "@/pages/modules/steganography";
