@@ -71,11 +71,22 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   // Modify the server startup for Vercel
+  // Add path import
+  import path from "path";
   if (process.env.VERCEL) {
-    // Export the Express app for Vercel serverless deployment
+    // Serve static files in production
+    const distPath = path.join(process.cwd(), "dist");
+    app.use(express.static(distPath));
+    
+    // Handle client-side routing
+    app.get("*", (_req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+    
+    // Export for Vercel
     export default app;
   } else {
-    // Start the server normally for local development
+    // Development server setup
     const port = parseInt(process.env.PORT || '5000', 10);
     app.listen({
       port,
