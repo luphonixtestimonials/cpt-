@@ -70,12 +70,19 @@ app.use((req, res, next) => {
   // Other ports are firewalled. Default to 5000 if not specified.
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  // Modify the server startup for Vercel
+  if (process.env.VERCEL) {
+    // Export the Express app for Vercel serverless deployment
+    export default app;
+  } else {
+    // Start the server normally for local development
+    const port = parseInt(process.env.PORT || '5000', 10);
+    app.listen({
+      port,
+      host: "0.0.0.0",
+      reusePort: true,
+    }, () => {
+      log(`serving on port ${port}`);
+    });
+  }
 })();
